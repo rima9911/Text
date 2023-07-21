@@ -1,0 +1,52 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Function to write data into a file
+void writeToFile(const char* filename) {
+    FILE* file = fopen(filename, "w");
+    if (file == NULL) {
+        printf("Error opening the file.\n");
+        return;
+    }
+
+    char data[100];
+    printf("Enter data to write into the file: ");
+    fgets(data, sizeof(data), stdin);
+
+    // Write data into the file
+    fprintf(file, "%s", data);
+
+    fclose(file);
+    printf("Data written to the file successfully.\n");
+}
+
+// Function to read data from a file
+void readFromFile(const char* filename) {
+    FILE* file = fopen(filename, "r");
+    if (file == NULL) {
+        printf("Error opening the file.\n");
+        return;
+    }
+
+    char data[100];
+
+    // Read data from the file
+    while (fgets(data, sizeof(data), file)) {
+        printf("%s", data);
+    }
+
+    fclose(file);
+}
+
+int main() {
+    const char* filename = "sample_file.txt";
+
+    // Write data into the file
+    writeToFile(filename);
+
+    // Read data from the file
+    printf("\nData read from the file:\n");
+    readFromFile(filename);
+
+    return 0;
+}
